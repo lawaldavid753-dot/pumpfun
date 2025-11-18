@@ -582,6 +582,3 @@ function setup(){
     }
   }, 120_000); // refresh every 2 minutes
 })();
-
-
-
