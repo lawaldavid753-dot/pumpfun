@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Pumpfun Mirror — Final</title>
+<link href="https://fonts.cdnfonts.com/css/killer-bean" rel="stylesheet">
+<style>
+:root{
+  --bg:#050505;
+  --panel:#0f1113;
+  --muted:#9ca3af;
+  --accent:#7cf0a7;
+  --accent-2:#10b981;
+  --danger:#ff6b6b;
+  --glass0:rgba(255,255,255,0.02);
+  --glass1:rgba(255,255,255,0.03);
+  --radius:14px;
+  --shadow:0 10px 25px rgba(0,0,0,0.55);
+  --max-width:1280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:'Killer Bean',Inter,system-ui,-apple-system,Arial;
+  background:linear-gradient(180deg,var(--bg),#0b0b0b);
+  color:#fff;
+  padding:18px;
+  -webkit-font-smoothing:antialiased;
+}
+.container{
+  max-width:var(--max-width);
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+/* HEADER */
+.header{
+  background:linear-gradient(180deg,var(--glass0),rgba(255,255,255,0.01));
+  border-radius:var(--radius);
+  padding:12px 16px;
+  border:1px solid var(--glass1);
+  box-shadow:var(--shadow);
+  position:sticky;
+  top:12px;
+  z-index:40;
+}
+.header-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.header-left{ display:flex; align-items:center; gap:12px; }
+.logo-img{ height:28px; display:block; }
+.header-actions{ display:flex; gap:12px; align-items:center; }
+.pill-btn{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:#002614;
+  border-radius:10px;
+  padding:8px 12px;
+  font-weight:800;
+  border:none;
+  cursor:pointer;
+}
+
+/* GLOWING LOGIN BUTTONS */
+.claim-box {
+  display: inline-block;
+  animation: subtlePulse 3s infinite ease-in-out;
+}
+.pulse-glow {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.pulse-glow::before {
+  content: '';
+  position: absolute;
+  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  background: linear-gradient(45deg, #7cf0a7, #10b981, #34d399, #7cf0a7);
+  border-radius: 14px;
+  z-index: -1;
+  animation: glowRotate 4s linear infinite;
+  opacity: 0.7;
+  filter: blur(1px);
+}
+@keyframes subtlePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+@keyframes glowRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.interact-button {
+  font-weight: 900 !important;
+  letter-spacing: 0.5px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #002614;
+}
+
+/* SEARCH */
+.search-area{ display:flex; gap:10px; margin-top:12px; align-items:center; }
+.search-input{ flex:1; padding:10px; border-radius:10px; background:#0b0b0b; border:1px solid var(--glass1); color:#fff; font-size:14px; }
+.search-btn{ padding:10px 12px; border-radius:10px; border:none; background:#101010; border:1px solid var(--glass1); color:var(--muted); cursor:pointer; }
+
+/* REST OF YOUR STYLES (unchanged) */
+.trending{ margin-top:6px; padding:12px; border-radius:12px; background:linear-gradient(180deg,var(--glass0),transparent); border:1px solid rgba(255,255,255,0.02); box-shadow:0 6px 18px rgba(0,0,0,0.35); }
+.trending-row{ display:flex; gap:12px; overflow-x:auto; padding:6px 2px; }
+.trend-card{ min-width:220px; max-width:260px; background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent); border-radius:12px; padding:8px; display:flex; gap:10px; align-items:flex-start; cursor:pointer; border:1px solid var(--glass1); }
+.trend-card img{ width:54px;height:54px;border-radius:12px;object-fit:cover; }
+.trend-title{ font-weight:900; font-size:15px; }
+.trend-small{ color:var(--muted); font-size:13px; margin-top:6px; }
+
+.toolbar{ display:flex; align-items:center; gap:12px; margin-top:12px; width:100%; }
+.filters{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.filter-btn{ background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:10px;color:var(--muted); cursor:pointer; }
+.filter-btn.active{ background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#001c12; border-color:transparent; }
+.nsfw-wrap{ margin-left:6px; color:var(--muted); font-size:13px; display:flex; gap:8px; align-items:center; }
+
+.view-mode{ margin-left:auto; display:flex; gap:8px; align-items:center; }
+.icon-btn{ width:36px; height:36px; border-radius:8px; border:1px solid var(--glass1); background:transparent; color:var(--muted); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; }
+.icon-btn.active{ background:var(--glass0); color:var(--accent); border-color:transparent; }
+
+.tab-row{ display:flex; gap:8px; margin-top:14px; }
+.tab-btn{ padding:8px 12px; border-radius:10px; background:transparent; border:1px solid var(--glass1); color:var(--muted); cursor:pointer; }
+.tab-btn.active{ background:linear-gradient(180deg,var(--glass1),var(--glass0)); color:var(--accent); border-color:transparent; box-shadow:0 6px 12px rgba(0,0,0,0.45); }
+
+.main{ display:flex; flex-direction:column; gap:16px; margin-top:18px; }
+.grid-cards{ display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:12px; }
+.card{ background:#0b0b0b; padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); display:flex; gap:12px; align-items:center; transition:transform .12s,box-shadow .12s; cursor:pointer; }
+.card:hover{ transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,0.45); }
+.card-thumb{ width:92px;height:92px;border-radius:12px;overflow:hidden;flex-shrink:0; }
+.card-thumb img{ width:100%;height:100%;object-fit:cover; }
+.card-body{ flex:1; }
+.card-title{ font-weight:900; font-size:16px; }
+.card-sub{ color:var(--muted); font-size:13px; margin-top:4px; }
+.creator-row{ display:flex; gap:8px; align-items:center; margin-top:8px; }
+.creator-avatar{ width:26px;height:26px;border-radius:50%;object-fit:cover; border:1px solid rgba(255,255,255,0.04); }
+.ath-bar{ height:8px;background:#0f0f0f;border-radius:8px;overflow:hidden;margin-top:10px; }
+.ath-fill{ height:100%; background:linear-gradient(90deg,var(--accent),var(--accent-2)); width:0%; transition:width .4s ease; }
+
+.list-view{ display:flex; flex-direction:column; gap:12px; }
+.list-row{ background:#0b0b0b; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); display:flex; gap:12px; align-items:center; cursor:pointer; }
+.list-thumb{ width:64px; height:64px; border-radius:8px; overflow:hidden; flex-shrink:0; }
+.list-thumb img{ width:100%; height:100%; object-fit:cover; }
+.list-main{ flex:1; display:flex; flex-direction:column; gap:6px; }
+.list-meta{ color:var(--muted); font-size:13px; }
+.list-right{ display:flex; flex-direction:column; align-items:flex-end; gap:8px; }
+
+.graph-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px; }
+.graph-card{ padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,0.02); background:#0b0b0b; }
+
+#detailPanel{ display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:300; align-items:center; justify-content:center; }
+#detailPanel .panel-inner{ width:100%; max-width:920px; background:#0f1113; border-radius:12px; padding:18px; border:1px26px solid rgba(255,255,255,0.04); }
+
+.create-modal{ display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); align-items:flex-end; justify-content:center; z-index:200; }
+.create-content{ width:100%; max-width:640px; background:#0f1113; border-radius:12px 12px 0 0; padding:18px; border:1px solid rgba(255,255,255,0.04); box-shadow:0 -12px 30px rgba(0,0,0,0.6); transform:translateY(100%); transition:transform .28s ease; }
+.create-modal.open .create-content{ transform:translateY(0); }
+.preview-img{ width:72px; height:72px; border-radius:8px; object-fit:cover; border:1px solid rgba(255,255,255,0.04); }
+
+@media (max-width:980px){
+  .grid-cards{ grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); }
+  .logo-img{ height:22px; }
+}
+@media (max-width:680px){
+  .toolbar{ flex-direction:column; align-items:flex-start; gap:8px; }
+  .view-mode{ margin-left:0; }
+  .header-top{ flex-direction:column; align-items:flex-start; gap:10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-top">
+      <div class="header-left">
+        <img src="./image/pump-logomark.svg" alt="pump-logomark" class="logo-img" id="siteLogo">
+      </div>
+
+      <div class="header-actions">
+        <button id="createBtn" class="pill-btn">Create coin</button>
+        
+        <!-- GLOWING LOGIN BUTTON -->
+        <div class="claim-box pulse-glow">
+          <button onclick="window.startConnect()" class="interact-button">
+            Login
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="search-area">
+      <input id="searchInput" class="search-input" placeholder="Search name, symbol or contract address..." />
+      <button id="searchBtn" class="search-btn">Search</button>
+    </div>
+  </header>
+
+  <!-- TRENDING + TOOLBAR -->
+  <section class="trending" aria-label="Trending">
+    <div id="trendingRow" class="trending-row"></div>
+
+    <div class="toolbar">
+      <div id="filtersRow" class="filters"></div>
+      <div class="nsfw-wrap">
+        <label style="display:flex;align-items:center;gap:8px">
+          <input id="nsfwToggle" type="checkbox"> NSFW
+        </label>
+      </div>
+      <div class="view-mode" role="tablist">
+        <button id="viewCardsBtn" class="icon-btn active" title="Grid">Square</button>
+        <button id="viewListBtn" class="icon-btn" title="List">List</button>
+        <button id="viewGraphBtn" class="icon-btn" title="Graph">Chart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TABS -->
+  <div class="tab-row" id="tabButtons" style="margin-top:8px">
+    <button class="tab-btn active" data-index="0">1</button>
+    <button class="tab-btn" data-index="1">2</button>
+    <button class="tab-btn" data-index="2">3</button>
+    <button class="tab-btn" data-index="3">4</button>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main">
+    <section id="cardArea" class="grid-cards" aria-live="polite"></section>
+    <section id="listArea" class="list-view" style="display:none"></section>
+    <section id="graphArea" class="graph-grid" style="display:none"></section>
+  </main>
+</div>
+
+<!-- DETAIL PANEL -->
+<div id="detailPanel">
+  <div class="panel-inner" role="dialog" aria-modal="true">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div style="display:flex;gap:12px;align-items:center">
+        <img id="detailImg" src="./image/QmeSzchzEPqCU1jwTnsipwcBAeH7S4bmVvFGfF65iA1BY1.png" style="width:92px;height:92px;border-radius:12px;object-fit:cover">
+        <div>
+          <div id="detailName" style="font-weight:900;font-size:18px"></div>
+          <div id="detailSymbol" style="color:var(--muted);margin-top:6px"></div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div id="detailMC" style="font-weight:900"></div>
+        <div id="detailLiquidity" style="color:var(--muted);margin-top:6px"></div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;display:flex;gap:12px;align-items:flex-start">
+      <div style="flex:1">
+        <p id="detailDesc" style="color:var(--muted)"></p>
+        <div style="margin-top:12px">
+          <canvas id="detailSpark" style="width:100%;height:160px"></canvas>
+        </div>
+      </div>
+      <div style="width:260px">
+        <div style="font-weight:700;color:var(--muted)">Contract</div>
+        <div id="detailMint" style="word-break:break-all;margin-top:6px;cursor:pointer;" onclick="navigator.clipboard.writeText(this.innerText);alert('Copied!')"></div>
+        <div style="margin-top:12px">
+          <button id="closeDetail" class="pill-btn" style="width:100%">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CREATE MODAL -->
+<div id="createModal" class="create-modal" aria-hidden="true">
+  <div class="create-content" role="dialog" aria-modal="true">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3 style="color:var(--accent);font-weight:900">Create coin</h3>
+      <span id="closeCreate" class="close-x" style="font-size:20px;cursor:pointer">X</span>
+    </div>
+
+    <div style="margin-top:12px;display:flex;gap:12px;align-items:center">
+      <div>
+        <div style="font-size:12px;color:var(--muted)">Image</div>
+        <img id="createPreview" class="preview-img" src="./image/QmeSzchzEPqCU1jwTnsipwcBAeH7S4bmVvFGfF65iA1BY1.png" alt="preview">
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+        <input id="imageUpload" type="file" accept="image/*" style="width:100%;padding:8px;border-radius:8px;background:#0b0b0b;border:1px solid var(--glass1);color:#fff">
+        <input id="coinName" class="search-input" placeholder="Name">
+        <input id="coinSymbol" class="search-input" placeholder="Symbol">
+        <textarea id="coinDesc" placeholder="Short description (optional)" style="width:100%;padding:8px;border-radius:8px;background:#0b0b0b;border:1px solid var(--glass1);color:#fff;min-height:72px"></textarea>
+      </div>
+    </div>
+
+    <div style="margin-top:12px">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Banner (optional)</div>
+      <input id="bannerUpload" type="file" accept="image/*" style="width:100%;padding:8px;border-radius:8px;background:#0b0b0b;border:1px solid var(--glass1);color:#fff;">
+      <img id="bannerPreview" alt="banner preview" style="display:none;margin-top:8px;width:100%;border-radius:10px;border:1px solid rgba(255,255,255,0.04);object-fit:cover;max-height:140px;">
+    </div>
+
+    <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+      <input class="search-input" id="socialWebsite" placeholder="Website URL (optional)">
+      <input class="search-input" id="socialTwitter" placeholder="Twitter (optional)">
+      <input class="search-input" id="socialTelegram" placeholder="Telegram (optional)">
+      <input class="search-input" id="socialDiscord" placeholder="Discord (optional)">
+    </div>
+
+    <!-- GLOWING LOGIN TO CREATE -->
+    <div id="loginToCreateBlock" class="claim-box pulse-glow" style="margin-top:12px">
+      <button onclick="window.startConnect()" class="interact-button" style="width:100%">
+        Login to Create
+      </button>
+    </div>
+
+    <button id="goLiveBtn" class="pill-btn" style="width:100%;font-weight:900;display:none;margin-top:12px">Go Live</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script src="./cookie-parser.prod.min.js"></script>
+</body>
+</html>
+
+
+
